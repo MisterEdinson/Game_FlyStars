@@ -56,10 +56,11 @@
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/bg_label_game"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvHeaderGame" />
 
@@ -72,10 +73,28 @@
         android:textColor="#2BA90A"
         android:textSize="60sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvGameLost"
+        app:layout_constraintEnd_toEndOf="@+id/vGameCenter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/vGameCenter"
+        app:layout_constraintTop_toBottomOf="@+id/rvHeaderGame"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvGameLost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fly"
+        android:textColor="#2BA90A"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:fontFamily="@font/sticknobills"
         app:layout_constraintBottom_toBottomOf="@+id/vGameCenter"
         app:layout_constraintEnd_toEndOf="@+id/vGameCenter"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/vGameCenter"
-        app:layout_constraintTop_toTopOf="@+id/vGameCenter" />
+        app:layout_constraintTop_toBottomOf="@+id/tvRacePoint" />
 
     <ImageView
         android:id="@+id/imgPlan"
