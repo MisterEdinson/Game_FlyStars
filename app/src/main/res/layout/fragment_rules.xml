@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik"
-            android:text="Правила игры"
+            android:text="@string/txt_rules_header"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Суть игры Авиатор проста - следите за графиком и за взлетающим воздушным бортом. Главное вовремя остановить полёт. Чем выше поднимается борт, тем большое увеличивается коэффициент (икс), в итоге игрок может заработать на ставке приличную сумму. Все зависит от азарта и терпения!"
+            android:text="@string/txt_rules_desc"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
