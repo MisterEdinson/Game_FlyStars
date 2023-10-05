@@ -7,4 +7,12 @@
     <string name="txt_exit">Выход</string>
     <string name="txt_rules_header">Правила игры</string>
     <string name="txt_rules_desc">Суть игры Авиатор проста - следите за графиком и за взлетающим воздушным бортом. Главное вовремя остановить полёт. Чем выше поднимается борт, тем большое увеличивается коэффициент (икс), в итоге игрок может заработать на ставке приличную сумму. Все зависит от азарта и терпения!</string>
+    <string name="_1_78">1.78</string>
+    <string name="_4_60x">4,60X</string>
+    <string name="gamed">ИГРАТЬ!</string>
+    <string name="_4_0">4.0</string>
+    <string name="_5_0">5.0</string>
+    <string name="_1_0">1.0</string>
+    <string name="_2_0">2.0</string>
+    <string name="_1_00">1.00</string>
 </resources>
