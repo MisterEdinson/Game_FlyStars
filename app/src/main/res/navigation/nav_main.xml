@@ -26,5 +26,9 @@
         android:id="@+id/gameFragment"
         android:name="com.example.game_flystars.ui.game.GameFragment"
         android:label="fragment_game"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game" >
+        <action
+            android:id="@+id/action_gameFragment_to_rulesFragment"
+            app:destination="@id/rulesFragment" />
+    </fragment>
 </navigation>

@@ -19,7 +19,6 @@ import kotlin.random.Random
 class GameFragment : Fragment() {
 
     private lateinit var binding: FragmentGameBinding
-    private var timer: TimerGame? = null
     private var totalRace: Double = 1.00
     private var play = false
     private var elapsedTime = 0L
@@ -30,7 +29,6 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentGameBinding.inflate(layoutInflater)
-        timer = TimerGame()
         return binding.root
     }
 
@@ -43,7 +41,7 @@ class GameFragment : Fragment() {
 
         binding.apply {
             imgGameHeader.setOnClickListener { findNavController().popBackStack() }
-            tvHeaderRules.setOnClickListener { }
+            tvHeaderRules.setOnClickListener { findNavController().navigate(R.id.action_gameFragment_to_rulesFragment) }
             btnRaceMinus.setOnClickListener { minusRace() }
             btnRacePlus.setOnClickListener { plusRace() }
             tvRaceInstance1.setOnClickListener { setRace(1.0) }
@@ -68,20 +66,26 @@ class GameFragment : Fragment() {
     }
 
     private fun plusRace() {
-        totalRace += 0.01
-        totalRace = round(totalRace * 100) / 100
-        updateInfo()
+        if(!play){
+            totalRace += 0.01
+            totalRace = round(totalRace * 100) / 100
+            updateInfo()
+        }
     }
 
     private fun minusRace() {
-        totalRace -= 0.01
-        totalRace = round(totalRace * 100) / 100
-        updateInfo()
+        if(!play){
+            totalRace -= 0.01
+            totalRace = round(totalRace * 100) / 100
+            updateInfo()
+        }
     }
 
     private fun setRace(set: Double) {
-        totalRace = set
-        updateInfo()
+        if(!play){
+            totalRace = set
+            updateInfo()
+        }
     }
 
     private fun updateInfo() {
@@ -112,6 +116,7 @@ class GameFragment : Fragment() {
             tvGameStart.text = "ИГРАТЬ!"
             tvGameStart.setBackgroundResource(R.drawable.bg_btn_start)
         }
+        dialogVisible()
     }
 
     private fun startStopwatch() {
@@ -142,6 +147,16 @@ class GameFragment : Fragment() {
             tvGameLost.visibility = View.VISIBLE
             tvGameStart.text = "ИГРАТЬ!"
             tvGameStart.setBackgroundResource(R.drawable.bg_btn_start)
+        }
+    }
+
+    private fun dialogVisible(){
+        CoroutineScope(Dispatchers.Main).launch {
+            binding.apply {
+                dialogWin.visibility = View.VISIBLE
+                delay(2000)
+                dialogWin.visibility = View.INVISIBLE
+            }
         }
     }
 }
