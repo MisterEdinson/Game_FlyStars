@@ -1,11 +1,10 @@
 package com.example.game_flystars.ui.game
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.game_flystars.R
 import com.example.game_flystars.databinding.FragmentGameBinding
@@ -23,6 +22,8 @@ class GameFragment : Fragment() {
     private var play = false
     private var elapsedTime = 0L
     private var random: Long = 0
+    private lateinit var adapter: GameAdapter
+    private val listInt = mutableListOf(1.78, 1.78, 1.78, 1.78, 1.78, 1.54)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,9 +35,10 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initAdapter()
         binding.apply {
             tvTotalRace.text = totalRace.toString()
-            tvRacePoint.text = "4.61X"
+            adapter.list.submitList(listInt)
         }
 
         binding.apply {
@@ -50,6 +52,11 @@ class GameFragment : Fragment() {
             tvRaceInstance5.setOnClickListener { setRace(5.0) }
             tvGameStart.setOnClickListener { game() }
         }
+    }
+
+    private fun initAdapter() {
+        adapter = GameAdapter()
+        binding.rvHeaderGame.adapter = adapter
     }
 
     private fun game() {
@@ -66,7 +73,7 @@ class GameFragment : Fragment() {
     }
 
     private fun plusRace() {
-        if(!play){
+        if (!play) {
             totalRace += 0.01
             totalRace = round(totalRace * 100) / 100
             updateInfo()
@@ -74,7 +81,7 @@ class GameFragment : Fragment() {
     }
 
     private fun minusRace() {
-        if(!play){
+        if (!play) {
             totalRace -= 0.01
             totalRace = round(totalRace * 100) / 100
             updateInfo()
@@ -82,7 +89,7 @@ class GameFragment : Fragment() {
     }
 
     private fun setRace(set: Double) {
-        if(!play){
+        if (!play) {
             totalRace = set
             updateInfo()
         }
@@ -98,8 +105,7 @@ class GameFragment : Fragment() {
         play = true
         elapsedTime = 0
         random = Random.nextInt(300, 5990).toLong()
-        random = (random/10)*10
-        Toast.makeText(context, random.toString(), Toast.LENGTH_SHORT).show()
+        random = (random / 10) * 10
         binding.apply {
             tvRacePoint.text = String.format("%d.%02d", 0, 0)
             tvGameStart.text = "СТОП!"
@@ -111,7 +117,6 @@ class GameFragment : Fragment() {
 
     private fun stopGame() {
         play = false
-        Toast.makeText(context, elapsedTime.toString(), Toast.LENGTH_SHORT).show()
         binding.apply {
             tvGameStart.text = "ИГРАТЬ!"
             tvGameStart.setBackgroundResource(R.drawable.bg_btn_start)
@@ -130,13 +135,13 @@ class GameFragment : Fragment() {
     }
 
     private fun updateTimerText() {
-        if(random == elapsedTime) lostGame()
+        if (random == elapsedTime) lostGame()
         val seconds = (elapsedTime / 1000)
         val centiseconds = (elapsedTime % 1000) / 10
         binding.tvRacePoint.text = String.format("%d.%02dX", seconds, centiseconds)
     }
 
-    private fun lostGame(){
+    private fun lostGame() {
         play = false
         val seconds = (elapsedTime / 1000)
         val centiseconds = (elapsedTime % 1000) / 10
@@ -150,7 +155,7 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun dialogVisible(){
+    private fun dialogVisible() {
         CoroutineScope(Dispatchers.Main).launch {
             binding.apply {
                 dialogWin.visibility = View.VISIBLE
