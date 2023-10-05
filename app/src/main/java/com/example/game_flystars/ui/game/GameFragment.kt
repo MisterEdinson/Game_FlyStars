@@ -99,6 +99,7 @@ class GameFragment : Fragment() {
         binding.apply {
             tvRacePoint.text = String.format("%d.%02d", 0, 0)
             tvGameStart.text = "СТОП!"
+            animation.progress = 0f
             tvGameStart.setBackgroundResource(R.drawable.bg_btn_stop)
             tvGameLost.visibility = View.GONE
         }
@@ -135,6 +136,8 @@ class GameFragment : Fragment() {
         val seconds = (elapsedTime / 1000)
         val centiseconds = (elapsedTime % 1000) / 10
         binding.apply {
+            imgPlan.visibility = View.INVISIBLE
+            animation.playAnimation()
             tvRacePoint.text = String.format("%d.%02dX", seconds, centiseconds)
             tvGameLost.visibility = View.VISIBLE
             tvGameStart.text = "ИГРАТЬ!"
