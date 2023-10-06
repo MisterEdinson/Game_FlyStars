@@ -64,7 +64,6 @@ class GameFragment : Fragment() {
             true -> {
                 stopGame()
             }
-
             false -> {
                 startGame()
             }
